@@ -4,7 +4,6 @@ const cors = require("cors");
 const User = require("./db/user");
 const FoodCategoryData = require("./db/foodCategory");
 const DisplayData = require("./db/DisplayData");
-const OrderData = require("./db/OrderData");
 const port = 5000;
 app.use(express.json());
 require("dotenv").config();
