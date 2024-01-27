@@ -20,16 +20,13 @@ const Signup = () => {
       alert("Please fill in all the details.");
       return;
     }
-    let result = await fetch(
-      "https://foodapp-backend-izt0.onrender.com/signup",
-      {
-        method: "POST",
-        body: JSON.stringify({ name, email, address, password }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    let result = await fetch("https://food-backend-jfkj.onrender.com/signup", {
+      method: "POST",
+      body: JSON.stringify({ name, email, address, password }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     result = await result.json();
     localStorage.setItem("user", JSON.stringify(result.result));
     localStorage.setItem("token", JSON.stringify(result.auth));

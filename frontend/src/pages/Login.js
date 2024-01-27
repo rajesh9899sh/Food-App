@@ -18,14 +18,11 @@ const Login = () => {
       alert("Please fill all the details.");
       return;
     }
-    let result = await fetch(
-      "https://foodapp-backend-izt0.onrender.com/login",
-      {
-        method: "post",
-        body: JSON.stringify({ email, password }),
-        headers: { "Content-type": "application/json" },
-      }
-    );
+    let result = await fetch("https://food-backend-jfkj.onrender.com/login", {
+      method: "post",
+      body: JSON.stringify({ email, password }),
+      headers: { "Content-type": "application/json" },
+    });
     result = await result.json();
     if (result.auth) {
       localStorage.setItem("user", JSON.stringify(result.user));

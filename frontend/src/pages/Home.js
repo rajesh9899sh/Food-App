@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from "react";
 import Footer from "../Component/Footer";
 import Card from "../Component/Card";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [foodCate, setFoodCate] = useState([]);
   const [foodItem, setFoodItem] = useState([]);
   const [search, setSearch] = useState("");
   const [cart, setCart] = useState([]);
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("CartData", JSON.stringify(cart));
   }, [cart]);
 
   const loadData = async () => {
-    let foodData = await fetch(
-      "https://foodapp-backend-izt0.onrender.com/test",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    let foodData = await fetch("https://food-backend-jfkj.onrender.com/test", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     foodData = await foodData.json();
     setFoodItem(foodData.myData);
   };
 
   const loadCategory = async () => {
     let foodCategory = await fetch(
-      "https://foodapp-backend-izt0.onrender.com/testCategory",
+      "https://food-backend-jfkj.onrender.com/testCategory",
       {
         method: "GET",
         headers: {
@@ -41,8 +41,12 @@ const Home = () => {
   };
 
   useEffect(() => {
-    loadData();
-    loadCategory();
+    if (token) {
+      loadData();
+      loadCategory();
+    } else {
+      navigate("/signup");
+    }
   }, []);
   return (
     <>
